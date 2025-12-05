@@ -1,0 +1,45 @@
+name: CI Test RUN
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_ROOT_PASSWORD: ${{ secrets.DB_PASSWORD}}
+          MYSQL_DATABASE: ${{secrets.DB_DATABASE}}
+        ports:
+          - 3306:3306
+    env:
+      DB_HOST: ${{secrets.DB_HOST}}
+      DB_USERNAME: ${{ secrets.DB_USERNAME }}
+      DB_PASSWORD: ${{secrets.DB_PASSWORD}}
+      DB_DATABASE: ${{secrets.DB_DATABASE}}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - run: npm install
+
+      - name: Wait for sql
+        run: |
+          for i in {1..30}; do
+           if mysql -h localhost -uroot -proot -e "SELECT 1" &>/dev/null; then
+            echo "MySQL Ready";
+             break;
+           fi
+           echo "Waiting for MySQL..."
+           sleep 2
+          done
+
+      - name: Run Tests
+        run: npx cucumber-js
