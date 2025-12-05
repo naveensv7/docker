@@ -10,40 +10,41 @@ jobs:
       mysql:
         image: mysql:8
         env:
-          MYSQL_ROOT_PASSWORD: ${{ secrets.DB_PASSWORD}}
-          MYSQL_DATABASE: ${{secrets.DB_DATABASE}}
+          MYSQL_ROOT_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          MYSQL_DATABASE: ${{ secrets.DB_DATABASE }}
         ports:
           - 3306:3306
+
     env:
-      DB_HOST: ${{secrets.DB_HOST}}
-      DB_USERNAME: ${{ secrets.DB_USERNAME }}
-      DB_PASSWORD: ${{secrets.DB_PASSWORD}}
-      DB_DATABASE: ${{secrets.DB_DATABASE}}
+      DB_HOST: 127.0.0.1 # talk to the service on localhost
+      DB_USER: root # mysql default user
+      DB_PASS: ${{ secrets.DB_PASSWORD }}
+      DB_DATABASE: ${{ secrets.DB_DATABASE }}
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: setup Node
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
       - run: npm install
 
-      - name: Wait for sql
+      - name: Wait for MySQL
         run: |
           for i in {1..30}; do
-           if mysql -h localhost -u${{secrets.DB_USERNAME}} -p${{secrets.DB_PASSWORD}} -e "SELECT 1" &>/dev/null; then
-            echo "MySQL Ready";
-             break;
-           fi
-           echo "Waiting for MySQL..."
-           sleep 2
+            if mysql -h "$DB_HOST" -u"$DB_USERENAME" -p"$DB_PASSWORD" -e "SELECT 1" >/dev/null 2>&1; then
+              echo "MySQL Ready"
+              break
+            fi
+            echo "Waiting for MySQL..."
+            sleep 2
           done
 
       - name: Test DB Connection
         run: |
-          mysql -h $DB_HOST -u $DB_USER -p$DB_PASS -e "SHOW DATABASES;"
+          mysql -h "$DB_HOST" -u"$DB_USERNAME" -p"$DB_PASSWORD" -e "SHOW DATABASES;"
 
       - name: Run Tests
         run: npx cucumber-js
