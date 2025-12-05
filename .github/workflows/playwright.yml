@@ -33,13 +33,17 @@ jobs:
       - name: Wait for sql
         run: |
           for i in {1..30}; do
-           if mysql -h localhost -uroot -proot -e "SELECT 1" &>/dev/null; then
+           if mysql -h localhost -u${{secrets.DB_USERNAME}} -p${{secrets.DB_PASSWORD}} -e "SELECT 1" &>/dev/null; then
             echo "MySQL Ready";
              break;
            fi
            echo "Waiting for MySQL..."
            sleep 2
           done
+
+      - name: Test DB Connection
+        run: |
+          mysql -h $DB_HOST -u $DB_USER -p$DB_PASS -e "SHOW DATABASES;"
 
       - name: Run Tests
         run: npx cucumber-js
