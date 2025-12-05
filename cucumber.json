@@ -1,0 +1,10 @@
+{
+  "default": {
+    "timeout": 20000,
+    "paths": ["./feature/**/*.feature", ""],
+    "import": ["./steps/**/*.js", "./support/world.js", "./hooks/**/*.js"],
+    "publishQuiet": true,
+    "format": ["progress", "json:reports/cucumber-report.json"],
+    "dryRun": false
+  }
+}

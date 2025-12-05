@@ -1,0 +1,105 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "this-is-to-check-login-functionality;validate-the-login-credentials",
+        "keyword": "Scenario",
+        "line": 5,
+        "name": "Validate the Login credentials",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 809686800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 6,
+            "name": "User Should be in \"https://practicetestautomation.com/practice-test-login/\"",
+            "match": {
+              "location": "file:\\C:\\Users\\HP\\OneDrive\\Desktop\\practicepomcucumberplaywright\\customworld\\steps\\Login.step.js:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3644945700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "user enters username",
+            "match": {
+              "location": "file:\\C:\\Users\\HP\\OneDrive\\Desktop\\practicepomcucumberplaywright\\customworld\\steps\\Login.step.js:14"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 93743799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "Enters the password",
+            "match": {
+              "location": "file:\\C:\\Users\\HP\\OneDrive\\Desktop\\practicepomcucumberplaywright\\customworld\\steps\\Login.step.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 29539399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 9,
+            "name": "User Should click on Login btn",
+            "match": {
+              "location": "file:\\C:\\Users\\HP\\OneDrive\\Desktop\\practicepomcucumberplaywright\\customworld\\steps\\Login.step.js:24"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 870926700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 10,
+            "name": "User Should logged in",
+            "match": {
+              "location": "file:\\C:\\Users\\HP\\OneDrive\\Desktop\\practicepomcucumberplaywright\\customworld\\steps\\Login.step.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 33495300
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 973599
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "this-is-to-check-login-functionality",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "This is to check login functionality",
+    "tags": [],
+    "uri": "feature\\Login.feature"
+  }
+]
