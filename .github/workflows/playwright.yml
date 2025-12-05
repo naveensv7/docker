@@ -30,6 +30,7 @@ jobs:
           node-version: "20"
 
       - run: npm install
+      - run: npx playwright install
 
       - name: Wait for MySQL
         run: |
