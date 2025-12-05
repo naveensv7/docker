@@ -46,5 +46,9 @@ jobs:
         run: |
           mysql -h "$DB_HOST" -u"$DB_USERNAME" -p"$DB_PASSWORD" -e "SHOW DATABASES;"
 
+      - name: Initialize DB Schema
+        run: |
+          mysql -h "$DB_HOST" -u"$DB_USERNAME" -p"$DB_PASSWORD" "$DB_DATABASE" < db/schema.sql
+
       - name: Run Tests
         run: npx cucumber-js
